@@ -1,5 +1,40 @@
 <?php
 
+$email = $_GET["email"];
+
+if (isset($_GET["email"])) {
+
+    $checker = checkEmail($email);
+    //var_dump($checker);
+    $message = messageAlert($checker);
+    var_dump($message);
+}
+
+
+function checkEmail($email)
+{
+    if (str_contains($email, '@') && str_contains($email, '.')) {
+        //echo 'Ti sei registrato correttamente';
+        return true;
+    } else {
+        // echo 'La tua email non possiede i requisiti adatti per poterti registrare';
+        return false;
+    }
+};
+
+function messageAlert($checker)
+{
+    if ($checker) {
+        return [
+            "status" => "success",
+            "text" => "Ti sei registrato correttamente"
+        ];
+    }
+    return [
+        "status" => "danger",
+        "text" => "La tua email non possiede i requisiti adatti per poterti registrare"
+    ];
+}
 
 
 ?>
@@ -20,11 +55,18 @@
     </header>
 
     <main>
+        <div class="container text-center py-4">
+            <h1>Subscribe a Newsletter</h1>
+            <form action="" method="get" class="py-4">
+                <input type="text" name="email" placeholder="Insert your email address">
+                <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+        </div>
 
     </main>
 
     <footer>
-        
+
     </footer>
 
 
