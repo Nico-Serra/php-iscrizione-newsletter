@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/utilities/functions.php';
+
 $email = $_GET["email"];
 
 if (isset($_GET["email"])) {
@@ -7,34 +9,9 @@ if (isset($_GET["email"])) {
     $checker = checkEmail($email);
     //var_dump($checker);
     $message = messageAlert($checker);
-    var_dump($message);
+    //var_dump($message);
 }
 
-
-function checkEmail($email)
-{
-    if (str_contains($email, '@') && str_contains($email, '.')) {
-        //echo 'Ti sei registrato correttamente';
-        return true;
-    } else {
-        // echo 'La tua email non possiede i requisiti adatti per poterti registrare';
-        return false;
-    }
-};
-
-function messageAlert($checker)
-{
-    if ($checker) {
-        return [
-            "status" => "success",
-            "text" => "Ti sei registrato correttamente"
-        ];
-    }
-    return [
-        "status" => "danger",
-        "text" => "La tua email non possiede i requisiti adatti per poterti registrare"
-    ];
-}
 
 
 ?>
@@ -51,10 +28,30 @@ function messageAlert($checker)
 
 <body>
     <header>
+        <nav class="navbar navbar-expand-sm bg-primary">
+            <div class="container-fluid ">
+                <a class="navbar-brand text-light" href="#">NewsLetter</a>
 
+                <div class="collapse navbar-collapse" id="navbarID">
+                    <div class="navbar-nav">
+                        <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active text-light" aria-current="page" href="">About</a>
+                        <a class="nav-link active text-light" aria-current="page" href="">Contact</a>
+
+                    </div>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <main>
+        <?php if ((isset($_GET["email"]))) : ?>
+            <div class="alert alert-<?php echo $message["status"] ?> alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <strong><?php echo $message["text"] ?></strong>
+            </div>
+        <?php endif ?>
+
         <div class="container text-center py-4">
             <h1>Subscribe a Newsletter</h1>
             <form action="" method="get" class="py-4">
@@ -62,6 +59,8 @@ function messageAlert($checker)
                 <button type="submit" class="btn btn-primary">Send</button>
             </form>
         </div>
+
+
 
     </main>
 
