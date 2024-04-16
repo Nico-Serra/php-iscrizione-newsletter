@@ -14,7 +14,8 @@ if (isset($_GET["email"])) {
     $message = messageAlert($checker);
     //var_dump($message);
 }
-
+session_start();
+$_SESSION["email"] = $email;
 
 
 ?>
@@ -58,7 +59,10 @@ if (isset($_GET["email"])) {
         <div class="container text-center py-4">
             <h1>Subscribe a Newsletter</h1>
             <form action="" method="get" class="py-4">
-                <input type="text" name="email" placeholder="Insert your email address">
+                <input 
+                type="text"
+                 name="email" 
+                 placeholder="<?php if (!isset($_GET["email"])) {echo 'insert your email address';} else {echo $email; }?>">
                 <button type="submit" class="btn btn-primary">Send</button>
             </form>
         </div>

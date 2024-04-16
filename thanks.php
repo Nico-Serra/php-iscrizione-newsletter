@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+var_dump($_SESSION);
+
+$emailSession = $_SESSION["email"];
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +37,7 @@
     </header>
 
     <main>
-        <h1 class="text-center py-5">Grazie per esserti registrato</h1>
+        <h1 class="text-center py-5">Grazie per esserti registrato <?php echo $emailSession ?></h1>
 
     </main>
 
