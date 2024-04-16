@@ -7,6 +7,9 @@ $email = $_GET["email"];
 if (isset($_GET["email"])) {
 
     $checker = checkEmail($email);
+    if ($checker === true) {
+        header('Location: ./thanks.php');
+    }
     //var_dump($checker);
     $message = messageAlert($checker);
     //var_dump($message);
